@@ -26,6 +26,7 @@ body{
 }
 
 
+
 /* components css */
 
 .dashboard{
@@ -43,35 +44,6 @@ body{
     margin: 50px 140px 0 140px;
 }
 
-.summary-parent{
-    background-color: #1d224191;
-    border-radius: 8px;
-    height: 320px;
-    padding: 5px 10px 4px 10px;
-}
-
-.summary{
-    display: flex  !important;
-    width:100%; 
-    justify-content: space-between;align-items: center;
-}
-
-.top-p{
-    border-bottom: 2px solid white;    
-}
-
-.table th, td {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
-.current-epoch{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
 .left-latest-news{
     width:  60%;
@@ -158,13 +130,14 @@ button{
     color: white;
     padding: 3px 5px 3px 5px;
     margin: 3px 5px 3px 5px;
+    cursor: pointer;
 }
 
 
 .latest-news{
     width: 32.5%;
     background-color: #1d224191;
-    height: 360px;
+    height: 370px;
     border-radius: 8px;
     border: #728cdf 1px solid;
     margin: 0 0 0 5px;
@@ -175,7 +148,7 @@ button{
 .Bomb-farms{
     width:100%; 
     justify-content: center;
-    height: 300px;
+    height: 350px;
     background-color: #1d224191;
     border: #728cdf 1px solid;
     border-radius: 8px;
