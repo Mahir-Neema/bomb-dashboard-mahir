@@ -2,6 +2,7 @@
 
 Thanks for taking the time to contribute!
 You can start by reading our [Contribution guidelines](CONTRIBUTING.md) first.
+# Preview Deployed link: https://bomb-dashboard-mahir.netlify.app/
 
 ## Setup
 
