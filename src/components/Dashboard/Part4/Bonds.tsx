@@ -1,36 +1,21 @@
-import './Dashboard.css'
+import './Bonds.css'
 import React, { useMemo, useState,useCallback } from 'react';
-import useBombStats from '../../hooks/useBombStats';
-import useLpStats from '../../hooks/useLpStats';
-import useLpStatsBTC from '../../hooks/useLpStatsBTC';
-import useZap from '../../hooks/useZap';
-import useBondStats from '../../hooks/useBondStats';
-import usebShareStats from '../../hooks/usebShareStats';
-import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-// import { Bomb as bombTesting } from '../../bomb-finance/deployments/deployments.testing.json';
-//import { Bomb as bombProd } from '../../bomb-finance/deployments/deployments.mainnet.json';
-import { roundAndFormatNumber } from '../../0x';
-import useBombFinance from '../../hooks/useBombFinance';
-//import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
-import { Helmet } from 'react-helmet';
-import ProgressCountdown from '../../views/Boardroom/components/ProgressCountdown';
-import moment from 'moment';
-import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
-import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
-import useCurrentEpoch from '../../hooks/useCurrentEpoch';
-import ExchangeModal from '../../views/Bond/components/ExchangeModal';
-import useModal from '../../hooks/useModal';
-import { getDisplayBalance } from '../../utils/formatBalance';
-import { useTransactionAdder } from '../../state/transactions/hooks';
-import useTokenBalance from '../../hooks/useTokenBalance';
-import bshare1img from '../../assets/img/bshare-200x200.png';
-import bomb1img from '../../assets/img/bomb.png';
-import bbondimg from '../../assets/img/bbond.png'; 
-import Summary from './Part1/summary';
-import docs from '../../assets/img/docs.jpg';
-import discordimg from '../../assets/img/discord.jpg';
-import bshareBnb from '../../assets/img/bshare-bnb-LP.png'; 
-import bombBitcoin from '../../assets/img/bomb-bitcoin-LP.png'; 
+import useBombStats from '../../../hooks/useBombStats';
+import useLpStats from '../../../hooks/useLpStats';
+import useLpStatsBTC from '../../../hooks/useLpStatsBTC';
+import useBondStats from '../../../hooks/useBondStats';
+import usebShareStats from '../../../hooks/usebShareStats';
+import useTotalValueLocked from '../../../hooks/useTotalValueLocked';
+import useBombFinance from '../../../hooks/useBombFinance';
+import useTreasuryAllocationTimes from '../../../hooks/useTreasuryAllocationTimes';
+import useCurrentEpoch from '../../../hooks/useCurrentEpoch';
+import ExchangeModal from '../../../views/Bond/components/ExchangeModal';
+import useModal from '../../../hooks/useModal';
+import { getDisplayBalance } from '../../../utils/formatBalance';
+import { useTransactionAdder } from '../../../state/transactions/hooks';
+import useTokenBalance from '../../../hooks/useTokenBalance';
+import bbondimg from '../../../assets/img/bbond.png'; 
+
 import {Link} from 'react-router-dom';
 
 
@@ -38,19 +23,18 @@ import {Link} from 'react-router-dom';
 
 // metamask connect
 
-import TokenSymbol from '../../components/TokenSymbol';
+import TokenSymbol from '../../../components/TokenSymbol';
 import { useWallet } from 'use-wallet';
-import UnlockWallet from '../../components/UnlockWallet';
-import useBanks from '../../hooks/useBanks';
-import Banks from '../../contexts/Banks';
-import useBank from '../../hooks/useBank';
-import useRedeem from '../../hooks/useRedeem';
-import Investment from './Part2/Investment';
-import Bombfarms from './Part3/Bombfarms';
-import BondsPart from './Part4/Bonds';
+import UnlockWallet from '../../../components/UnlockWallet';
+import useBanks from '../../../hooks/useBanks';
+import Banks from '../../../contexts/Banks';
+import useBank from '../../../hooks/useBank';
+import useRedeem from '../../../hooks/useRedeem';
+import Investment from '.././Part2/Investment';
+import Bombfarms from '.././Part3/Bombfarms';
 
-function Dashboard() {
-  const {account} = useWallet();
+function BondsPart() {
+  const {account} = useWallet()
   const [banks] = useBanks();
   const activeBanks = banks.filter((bank) =>!bank.finished)[0];
   const bank = useBank(activeBanks.contract);
@@ -132,17 +116,38 @@ function Dashboard() {
     />,
   );
   return (
-    <div className='dashboard'>
-      <Link to={'/'} style={{color:'#9ee6ff',margin:'5px 0 20px 0'}}>« Back To Home Page</Link>
-      <Summary/>
-      <Investment/>
+      <div className="bonds global-margin">
+      <div>
+      <img src={bbondimg} style={{width:'70px',transform: 'translateY(30px)'}}/>
+        Bonds
+          <br></br>
+          <span className='dp-i' style={{padding:'10px 0 10px 70px'}}>BBOND can be purchased only on contraction periods, when T WAP of BOMB is below I</span>
+      </div>
 
-      <span></span>
-      <Bombfarms/>
-      <BondsPart/>
-    </div>
+      <div className="bonds-lower">
+        <div>Current Price: (Bomb)^2
+          <br/>
+          <div style={{fontSize:'20px',margin:'40px 0 40px 0'}}>BBOND = {Number(bondStat?.tokenInFtm).toFixed(4) || '-'}</div>
+        </div>
+        <div>Available to redeem:
+          <br/> <img src={bbondimg} style={{width:'50px',transform: 'translateY(30px)'}} alt="img"/>
+          {getDisplayBalance(bondBalance)}
+        </div>
+        <div>
+          <div style={{borderBottom: '1px solid #ddd'}}>
+            Purchase BBond <button onClick={onPresent} style={{padding:'5px 10px'}}>purchase 🛒</button>
+            <br/>
+            Bomb is over peg
+          </div>
+          {!!account? <div style={{paddingTop:'10px'}}>
+            Redeem Bomb <button style={{marginLeft:'15px',padding:'5px 10px'}} onClick={onRedeem}>Redeem ⬇️</button>
+          </div>:<UnlockWallet/>}
+        </div>
+      </div>
+
+      </div>
   )
 }
 
-export default Dashboard
+export default BondsPart
 

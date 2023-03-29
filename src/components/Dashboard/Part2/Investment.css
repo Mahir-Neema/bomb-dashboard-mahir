@@ -2,14 +2,14 @@
     border: red 1px solid;
 } */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Unbounded&display=swap');
-body{
+/* body{
     color: white;
     position: absolute; 
     z-index: 1; 
     box-sizing: border-box;
-    background: url(../../assets/img/background.jpg) repeat !important;
+    background: url(../../../assets/img/background.jpg) repeat !important;
     font-family: 'Nunito', sans-serif;
-}
+} */
 
 /* utils */
 
@@ -29,21 +29,6 @@ body{
 
 /* components css */
 
-.dashboard{
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto; */
-    margin: 50px 140px 0 140px;
-}
-
 
 .left-latest-news{
     width:  60%;
@@ -60,6 +45,7 @@ body{
     color: #9ee6ff;
     margin: 4px 3px 4px 3px;
     text-decoration: underline solid #9ee6ff;
+    cursor: pointer;
 }
 
 .invest-now{
@@ -68,6 +54,7 @@ body{
     font-weight: 500;
     font-size: 20px;
     padding: 5px;
+    cursor: pointer;
 }
 
 .discord{
@@ -80,7 +67,6 @@ body{
     width: 47%;
     border: #728cdf 1px solid;
     font-weight: bolder;
-    cursor: pointer;
 }
 
 .docs{
@@ -93,7 +79,6 @@ body{
     margin-left: 10px;
     border: #728cdf 1px solid;
     font-weight: bolder;
-    cursor: pointer;
 }
 
 .board-room{
@@ -147,30 +132,3 @@ button{
     transform: translateY(-270px);
 }
 
-.Bomb-farms{
-    width:100%; 
-    justify-content: center;
-    height: 350px;
-    background-color: #1d224191;
-    border: #728cdf 1px solid;
-    border-radius: 8px;
-    padding: 10px 13px 6px 13px;
-    transform: translateY(-270px);
-}
-
-.bonds{
-    width:100%; 
-    justify-content: center;
-    height: 300px;
-    background-color: #1d224191;
-    border: #728cdf 1px solid;
-    border-radius: 8px;
-    padding: 10px 13px 6px 13px;
-    transform: translateY(-270px);
-}
-
-.bonds-lower{
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 50px 20px 50px;
-}

@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Unbounded&display=swap');
+.center{
+    text-align: center;
+}
+
+.dp-i{
+    display: inline-block;
+}
+
+.global-margin{
+    margin:10px 0 10px 0;
+}
+
+
+
+/* components css */
+.Bomb-farms{
+    width:100%; 
+    justify-content: center;
+    height: 350px;
+    background-color: #1d224191;
+    border: #728cdf 1px solid;
+    border-radius: 8px;
+    padding: 10px 13px 6px 13px;
+    transform: translateY(-270px);
+}
+
+

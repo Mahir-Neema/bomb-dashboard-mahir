@@ -1,36 +1,32 @@
-import './Dashboard.css'
+import './Investment.css';
 import React, { useMemo, useState,useCallback } from 'react';
-import useBombStats from '../../hooks/useBombStats';
-import useLpStats from '../../hooks/useLpStats';
-import useLpStatsBTC from '../../hooks/useLpStatsBTC';
-import useZap from '../../hooks/useZap';
-import useBondStats from '../../hooks/useBondStats';
-import usebShareStats from '../../hooks/usebShareStats';
-import useTotalValueLocked from '../../hooks/useTotalValueLocked';
+import useBombStats from '../../../hooks/useBombStats';
+import useLpStats from '../../../hooks/useLpStats';
+import useLpStatsBTC from '../../../hooks/useLpStatsBTC';
+import useZap from '../../../hooks/useZap';
+import useBondStats from '../../../hooks/useBondStats';
+import usebShareStats from '../../../hooks/usebShareStats';
+import useBShareSwapperStats from '../../../hooks/BShareSwapper/useBShareSwapperStats';
+import useTotalValueLocked from '../../../hooks/useTotalValueLocked';
 // import { Bomb as bombTesting } from '../../bomb-finance/deployments/deployments.testing.json';
 //import { Bomb as bombProd } from '../../bomb-finance/deployments/deployments.mainnet.json';
-import { roundAndFormatNumber } from '../../0x';
-import useBombFinance from '../../hooks/useBombFinance';
+import { roundAndFormatNumber } from '../../../0x';
+import useBombFinance from '../../../hooks/useBombFinance';
 //import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 import { Helmet } from 'react-helmet';
-import ProgressCountdown from '../../views/Boardroom/components/ProgressCountdown';
+import ProgressCountdown from '../../../views/Boardroom/components/ProgressCountdown';
 import moment from 'moment';
-import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
+import useTreasuryAllocationTimes from '../../../hooks/useTreasuryAllocationTimes';
 import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
-import useCurrentEpoch from '../../hooks/useCurrentEpoch';
-import ExchangeModal from '../../views/Bond/components/ExchangeModal';
-import useModal from '../../hooks/useModal';
-import { getDisplayBalance } from '../../utils/formatBalance';
-import { useTransactionAdder } from '../../state/transactions/hooks';
-import useTokenBalance from '../../hooks/useTokenBalance';
-import bshare1img from '../../assets/img/bshare-200x200.png';
-import bomb1img from '../../assets/img/bomb.png';
-import bbondimg from '../../assets/img/bbond.png'; 
-import Summary from './Part1/summary';
-import docs from '../../assets/img/docs.jpg';
-import discordimg from '../../assets/img/discord.jpg';
-import bshareBnb from '../../assets/img/bshare-bnb-LP.png'; 
-import bombBitcoin from '../../assets/img/bomb-bitcoin-LP.png'; 
+import useCurrentEpoch from '../../../hooks/useCurrentEpoch';
+import ExchangeModal from '../../../views/Bond/components/ExchangeModal';
+import useModal from '../../../hooks/useModal';
+import { getDisplayBalance } from '../../../utils/formatBalance';
+import { useTransactionAdder } from '../../../state/transactions/hooks';
+import useTokenBalance from '../../../hooks/useTokenBalance';
+import bshare1img from '../../../assets/img/bshare-200x200.png'; 
+import docs from '../../../assets/img/docs.jpg';
+import discordimg from '../../../assets/img/discord.jpg';
 import {Link} from 'react-router-dom';
 
 
@@ -38,18 +34,15 @@ import {Link} from 'react-router-dom';
 
 // metamask connect
 
-import TokenSymbol from '../../components/TokenSymbol';
+import TokenSymbol from '../../TokenSymbol';
 import { useWallet } from 'use-wallet';
-import UnlockWallet from '../../components/UnlockWallet';
-import useBanks from '../../hooks/useBanks';
-import Banks from '../../contexts/Banks';
-import useBank from '../../hooks/useBank';
-import useRedeem from '../../hooks/useRedeem';
-import Investment from './Part2/Investment';
-import Bombfarms from './Part3/Bombfarms';
-import BondsPart from './Part4/Bonds';
+import UnlockWallet from '../../UnlockWallet';
+import useBanks from '../../../hooks/useBanks';
+import Banks from '../../../contexts/Banks';
+import useBank from '../../../hooks/useBank';
+import useRedeem from '../../../hooks/useRedeem';
 
-function Dashboard() {
+function Investment() {
   const {account} = useWallet();
   const [banks] = useBanks();
   const activeBanks = banks.filter((bank) =>!bank.finished)[0];
@@ -59,7 +52,7 @@ function Dashboard() {
   const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-LP');
   const bShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useBombStats();
-  const bShareStats = usebShareStats();
+  const bShareStats = usebShareStats(); 
   const tBondStats = useBondStats();
   const bombFinance = useBombFinance();
   const bondBalance = useTokenBalance(bombFinance?.BBOND);
@@ -132,17 +125,54 @@ function Dashboard() {
     />,
   );
   return (
-    <div className='dashboard'>
-      <Link to={'/'} style={{color:'#9ee6ff',margin:'5px 0 20px 0'}}>« Back To Home Page</Link>
-      <Summary/>
-      <Investment/>
+    <div style={{marginBottom:'30px'}}>
+    <div className='left-latest-news dp-i'>
+      <div className="investment-strgy">Read Investment Strategy ›</div>
+      <div className="invest-now center">Invest Now</div>
+      <div style={{display:'flex',justifyContent:'space-between'}}>
+        <div className="discord global-margin"><img src={discordimg} style={{width:'30px',borderRadius:'50%' ,transform: 'translateY(6px)',background:'white',marginRight:'5px'}}/>Chat on Discord</div>
+        <div className="docs global-margin"><img src={docs} style={{width:'30px',borderRadius:'50%' ,transform: 'translateY(6px)',background:'white',marginRight:'5px'}}/>Read docs</div>
+      </div>
+      <div className="board-room">
+        <div style={{borderBottom: '1px solid #ddd'}}>
+          <img src={bshare1img} style={{width:'30px',transform: 'translateY(6px)'}}/>
+          BoardRoom
+          <span style={{margin:'20px',backgroundColor:'#0aa583',padding:'0 5px 0 5px'}}>Recommended</span>
+          <br></br>
+          <div className='dp-i' style={{padding:'10px 0 10px 0'}}>Stake BSHARE and earn BOMB every epoch</div>
+          <span style={{marginLeft:'7vw'}}>TVL: ${(TVL).toFixed(0)}</span>
+        </div>
 
-      <span></span>
-      <Bombfarms/>
-      <BondsPart/>
+        <div>
+          <div className="total-staked">Total Staked: 7232</div>
+          <div className="daily-returns dp-i">Daily-returns:<br/><span style={{fontSize:'25px',fontWeight:'bolder'}}>2%</span></div>
+          <div className="yourstake dp-i">Your stake:<br/>6.0000<br/>≈ $1171.62</div>
+          <div className="earned dp-i">Earned:<br/>1660.4413<br/>≈ $298.88</div>
+          <div className="boardroom-buttons dp-i">
+            {!!account ?(<>
+              <div className="depo-with">
+                <button style={{cursor: 'pointer'}} onClick={onRedeem}>Deposit 🔼</button>
+                <button style={{cursor: 'pointer'}} onClick={onRedeem}>Withdraw 🔽</button>
+              </div>
+              <div className="claimrewards">
+                <button style={{padding:'3px 46px 3px 46px',cursor: 'pointer'}}>Claim Rewards</button>
+              </div>
+            </>):(<UnlockWallet/>)}
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <div className="latest-news dp-i">Latest News</div>
     </div>
   )
 }
 
-export default Dashboard
+export default Investment
 
